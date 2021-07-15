@@ -18,8 +18,8 @@ public class ConvertCurrencyController {
     }
 
     @PostMapping("/abc")
-    public String convert(@RequestParam double money , double typeMoney, double typeMoney1,Model model){
-        double result =convertService.convert(money ,typeMoney,typeMoney1);
+    public String convert(@RequestParam double money , @RequestParam  double exchangeMoney, @RequestParam double moneyChanged,Model model){
+        double result =convertService.convert(money ,exchangeMoney,moneyChanged);
         model.addAttribute("result",result);
         return "/list";
     }

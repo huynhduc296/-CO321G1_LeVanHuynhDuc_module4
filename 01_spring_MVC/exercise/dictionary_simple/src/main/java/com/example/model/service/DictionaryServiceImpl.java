@@ -7,13 +7,13 @@ public class DictionaryServiceImpl implements DictionaryService {
 
     @Override
     public String convert(String word) {
-        String[] Vietnamese = {"xin chào","tốc biến","dịch chuyển","bay","nhảy"};
-        String[] English = {"hello","speed","move","ply","jump"};
+        String[] vietNam = {"xin chào","tốc biến","dịch chuyển","bay","nhảy"};
+        String[] english = {"hello","speed","move","ply","jump"};
         boolean check = false;
         String result = "";
-        for (int i =0;i<English.length;i++){
-            if (English[i].equals(word)){
-                result = Vietnamese[i];
+        for (int i =0;i<english.length;i++){
+            if (english[i].equals(word)){
+                result = vietNam[i];
                 check = true;
             }
         }

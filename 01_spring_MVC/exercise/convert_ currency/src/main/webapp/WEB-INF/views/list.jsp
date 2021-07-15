@@ -23,13 +23,13 @@
                 <input type="number" name="money" placeholder="Tiền cần thay đổi">
             </th>
             <th>
-                <select name="typeMoney">
+                <select name="exchangeMoney">
                     <option value="23000">VND</option>
                     <option value="1">USD</option>
                 </select>
             </th>
             <th>
-                <select name="typeMoney1">
+                <select name="moneyChanged">
                     <option value="1">USD</option>
                     <option value="23000">VND</option>
                 </select>

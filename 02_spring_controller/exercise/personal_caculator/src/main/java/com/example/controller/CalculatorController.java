@@ -16,7 +16,7 @@ public class CalculatorController {
         return "/list";
     }
     @RequestMapping("/calculator")
-    public String calculator(@RequestParam double numberOne, double numberSecond ,String calculator, Model model){
+    public String calculator(@RequestParam double numberOne, @RequestParam double numberSecond ,@RequestParam String calculator, Model model){
         String result=calculatorService.calculator(numberOne,numberSecond,calculator);
         model.addAttribute("result",result);
         return "/list";

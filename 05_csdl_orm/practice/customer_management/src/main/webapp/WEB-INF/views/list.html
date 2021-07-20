@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/layout :: head"></head>
+
+<body>
+<h3>Products</h3>
+<div style="display: flex;justify-content: space-between">
+    <p>
+        <a th:href="@{/customer/create}">
+            Add new product
+        </a>
+    </p>
+    <p>
+    <form action="/customer/search" method="post">
+        <input type="submit" value="search">
+        <input type="text" name="search">
+    </form>
+    </p>
+</div>
+<div class="notify">
+    <div th:if="${success}">
+        <span th:text="${success}"></span>
+    </div>
+</div>
+<table id="customer">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>address</th>
+        <th>email</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>Show</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row,rowStat : ${customer}">
+        <td th:text="${row.id}"></td>
+        <td th:text="${row.name}"></td>
+        <td th:text="${row.address}"></td>
+        <td th:text="${row.email}"></td>
+        <td><a th:href="@{/customer/edit(id=${row.id})}">edit</a></td>
+        <td><a th:href="@{/customer/delete(id=${row.id})}">delete</a></td>
+        <td><a th:href="@{/customer/view(id=${row.id})}">Show</a></td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

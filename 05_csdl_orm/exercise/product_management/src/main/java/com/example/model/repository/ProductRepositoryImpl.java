@@ -39,15 +39,18 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public void update(int id, Product product) {
-        TypedQuery<Product> typedQuery = BaseRepository.entityManager.createQuery(
-                "select c " + "from Product c " +"where c.id = ?1", Product.class);
-        );
-
+        EntityTransaction transaction =BaseRepository.entityManager.getTransaction();
+        transaction.begin();
+        BaseRepository.entityManager.merge(product);
+        transaction.commit();
     }
 
     @Override
     public void remove(int id) {
-
+        EntityTransaction transaction=BaseRepository.entityManager.getTransaction();
+        transaction.begin();
+        BaseRepository.entityManager.remove(this.findById(id));
+        transaction.commit();
     }
 
     @Override

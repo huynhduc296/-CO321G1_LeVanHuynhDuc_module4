@@ -18,7 +18,7 @@ public class BlogServiceImpl implements BlogService{
     }
 
     @Override
-    public Blog findById(Integer id) {
+    public Blog findById(int id) {
         return iBlogRepository.findById(id).orElse(null);
     }
 
@@ -28,7 +28,7 @@ public class BlogServiceImpl implements BlogService{
     }
 
     @Override
-    public void remove(Integer id) {
+    public void remove(int id) {
         iBlogRepository.deleteById(id);
     }
 }

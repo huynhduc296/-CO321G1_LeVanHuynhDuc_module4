@@ -6,14 +6,15 @@
 </head>
 <body>
 <h3>Do you want to delete Blog</h3>
+<a href="/blog">Back to list</a>
+
 <form th:action="@{/blog/delete(id=${blog.id})}" method="post">
+
     <a href="/blog">Back to list</a>
     <p>Id :</p>
     <span  th:text="${blog.id}"></span>
     <p>Name :</p>
     <span  th:text="${blog.name}"></span>
-    <p>Content :</p>
-    <span th:text="${blog.content}" ></span>
     <input type="submit" value="Delete">
 </form>
 </body>

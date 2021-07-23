@@ -23,6 +23,14 @@ import java.util.Locale;
     public Blog() {
     }
 
+    public Blog(Integer id, String name, String content, Date date, Category category) {
+        this.id = id;
+        this.name = name;
+        this.content = content;
+        this.date = date;
+        this.category = category;
+    }
+
     public Integer getId() {
         return id;
     }

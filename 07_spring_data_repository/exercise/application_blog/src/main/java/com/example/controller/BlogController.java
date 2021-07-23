@@ -76,24 +76,17 @@ public class BlogController {
         return "/blog/show";
     }
 
-//    @GetMapping(value = "/delete")
-//    public String showDelete(@RequestParam Integer id,Model model){
-//        model.addAttribute("blog",this.blogService.findById(id));
-//        return "/blog/delete";
-////    }
-//    @PostMapping(value = "/delete")
-//    public String deleteBlog(@RequestParam Integer id, RedirectAttributes redirectAttributes){
-//        this.blogService.remove(id);
-//        redirectAttributes.addFlashAttribute("msg","Delete Success");
-//        return "redirect:/blog";
-//    }
+    @GetMapping(value = "/delete")
+    public String showDelete(@RequestParam Integer id,Model model){
+        model.addAttribute("blog",this.blogService.findById(id));
+        return "/blog/delete";
+    }
 
-        @GetMapping(value = "delete/{id}")
-    public String showDelete(@PathVariable int id,RedirectAttributes redirectAttributes){
-        Optional<Blog> blog=blogService.findById(id);
-        blogService.remove(id);
-            redirectAttributes.addFlashAttribute("msg","Delete Success");
-        return "redirect:/blog/list";
-        }
+    @PostMapping(value = "/delete")
+    public String deleteBlog(@RequestParam Integer id, RedirectAttributes redirectAttributes){
+        this.blogService.remove(id);
+        redirectAttributes.addFlashAttribute("msg","Delete Success");
+        return "redirect:/blog";
+    }
 
 }

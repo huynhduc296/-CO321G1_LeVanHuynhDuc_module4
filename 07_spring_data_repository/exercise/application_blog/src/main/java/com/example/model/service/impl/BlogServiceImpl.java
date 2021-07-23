@@ -23,8 +23,8 @@ public class BlogServiceImpl implements IBlogService {
     }
 
     @Override
-    public Optional<Blog> findById(Integer id) {
-        return iBlogRepository.findById(id);
+    public Blog findById(Integer id) {
+        return iBlogRepository.findById(id).get();
     }
 
 

@@ -9,8 +9,10 @@
 <form th:action="@{/blog/create}" th:object="${blog}" method="post">
     <p>Name</p>
     <input type="text" th:field="*{name}">
+
     <p>Content</p>
     <textarea th:field="*{content}" cols="30"></textarea>
+
     <select  th:field="*{category}">
         <option  th:each="cate : ${category}"
                  th:text="${cate.name}"

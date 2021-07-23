@@ -4,6 +4,7 @@ import com.example.model.bean.Blog;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IBlogService {
@@ -16,6 +17,6 @@ public interface IBlogService {
     void remove(Integer id);
 
     Page<Blog> findAllByNameContaining(String name, Pageable pageable);
-
+    Page<Blog> findAllByCategory_Id(Long id,Pageable pageable);
     Page<Blog> findAll(Pageable pageable);
 }

@@ -7,17 +7,17 @@ import java.util.Locale;
 
 @Entity
 @Table(name = "blog")
-    public class Blog {
+public class Blog {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer id;
-        private String name;
-        private String content;
-        private Date date=new Date(System.currentTimeMillis());
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private String name;
+    private String content;
+    private Date date = new Date(System.currentTimeMillis());
 
     @ManyToOne
-    @JoinColumn(name = "category_id",referencedColumnName = "id")
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
     public Blog() {

@@ -19,15 +19,13 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/blog")
-
 public class BlogController {
     @Autowired
     IBlogService blogService;
 
     @Autowired
     ICategoryService categoryService;
-    @GetMapping("")
-
+    @GetMapping
     public ModelAndView listBlog(@RequestParam("search")Optional<String> search,
     @PageableDefault(size = 2) Pageable pageable){
         Page<Blog> blogs;
@@ -38,7 +36,6 @@ public class BlogController {
         } else {
             blogs = blogService.findAll(pageable);
         }
-
         modelAndView.addObject("blog", blogs);
         return modelAndView;
     }

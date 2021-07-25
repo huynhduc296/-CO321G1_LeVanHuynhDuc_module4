@@ -7,7 +7,9 @@ import com.example.model.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +29,8 @@ public class BlogController {
     ICategoryService categoryService;
     @GetMapping
     public ModelAndView listBlog(@RequestParam("search")Optional<String> search,
-    @PageableDefault(size = 2) Pageable pageable){
+    @PageableDefault(size = 2)
+    @SortDefault(sort = "date",direction = Sort.Direction.DESC) Pageable pageable){
         Page<Blog> blogs;
         ModelAndView modelAndView = new ModelAndView("/blog/list");
         if(search.isPresent()){

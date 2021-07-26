@@ -20,24 +20,27 @@ import java.util.List;
 public class UserController {
     @Autowired
     IUserService iUserService;
+
     @GetMapping("")
-    public String display(Model model){
-        model.addAttribute("userDto",new UserDto());
+    public String display(Model model) {
+        model.addAttribute("userDto", new UserDto());
         return "/index";
 
     }
+
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute UserDto userDto, BindingResult bindingResult, Model model){
-        new UserDto().validate(userDto,bindingResult);
-        if (bindingResult.hasFieldErrors()){
+    public String create(@Valid @ModelAttribute UserDto userDto, BindingResult bindingResult, Model model) {
+        new UserDto().validate(userDto, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
             return "/index";
-        }else {
-            User user=new User();
-            BeanUtils.copyProperties(userDto,user);
+        } else {
+            User user = new User();
+            BeanUtils.copyProperties(userDto, user);
             iUserService.save(user);
-            List<User> list=iUserService.findAll();
-            model.addAttribute("users",list);
-            return "/list";      }
+            List<User> list = iUserService.findAll();
+            model.addAttribute("users", list);
+            return "/list";
+        }
 
     }
 }

@@ -8,7 +8,7 @@ import javax.validation.constraints.NotEmpty;
 
 public class UserDto implements Validator {
     private Integer id;
-    @NotEmpty(message ="malformed name")
+    @NotEmpty(message = "malformed name")
     private String firstName;
     @NotEmpty
     private String lastName;
@@ -39,6 +39,7 @@ public class UserDto implements Validator {
     public String getLastName() {
         return lastName;
     }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -77,7 +78,7 @@ public class UserDto implements Validator {
 
         UserDto userDto = (UserDto) target;
         String phoneNumber = userDto.getPhoneNumber();
-        ValidationUtils.rejectIfEmpty(errors, "phoneNumber", "phoneNumber.empty","abc");
+        ValidationUtils.rejectIfEmpty(errors, "phoneNumber", "phoneNumber.empty", "abc");
         if (phoneNumber.length() > 11 || phoneNumber.length() < 10) {
             errors.rejectValue("phoneNumber", "phoneNumber.length");
         }

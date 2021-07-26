@@ -7,14 +7,14 @@
 <body>
 <table border="1px">
     <tr>
-        <th>Id : </th>
-        <th>LastName : </th>
-        <th>FirstName : </th>
-        <th>Email : </th>
-        <th>PhoneNumber : </th>
+        <th>Id :</th>
+        <th>LastName :</th>
+        <th>FirstName :</th>
+        <th>Email :</th>
+        <th>PhoneNumber :</th>
 
     </tr>
-    <tr th:each="user :${users}" >
+    <tr th:each="user :${users}">
         <td th:text="${user.id}"></td>
         <td th:text="${user.lastName}"></td>
         <td th:text="${user.firstName}"></td>

@@ -21,51 +21,52 @@ public class CategoryController {
     IBlogService blogService;
 
     @GetMapping
-    public String showList(Model model){
-        model.addAttribute("category",categoryService.findAll());
+    public String showList(Model model) {
+        model.addAttribute("category", categoryService.findAll());
         return "/category/list";
     }
 
     @GetMapping(value = "/create")
-    public String showFormCreate(Model model){
-        model.addAttribute("category",new Category());
+    public String showFormCreate(Model model) {
+        model.addAttribute("category", new Category());
         return "/category/create";
     }
+
     @PostMapping(value = "/create")
-    public String createCategory(@ModelAttribute Category category, Model model){
+    public String createCategory(@ModelAttribute Category category, Model model) {
         this.categoryService.save(category);
-        model.addAttribute("msg","Create Successfully");
+        model.addAttribute("msg", "Create Successfully");
         return "/category/create";
     }
 
     @GetMapping(value = "/edit")
-    public String showFormEdit(@RequestParam long id, Model model){
-        model.addAttribute("category",this.categoryService.findById(id));
+    public String showFormEdit(@RequestParam long id, Model model) {
+        model.addAttribute("category", this.categoryService.findById(id));
         return "/category/edit";
     }
 
     @PostMapping(value = "edit")
-    public String editCategory(@ModelAttribute Category category){
+    public String editCategory(@ModelAttribute Category category) {
         this.categoryService.save(category);
         return "redirect:/category";
     }
 
     @GetMapping(value = "/delete")
-    public String showDelete(@RequestParam Long id,Model model){
-        model.addAttribute("category",this.categoryService.findById(id));
+    public String showDelete(@RequestParam Long id, Model model) {
+        model.addAttribute("category", this.categoryService.findById(id));
         return "/category/delete";
     }
 
     @PostMapping(value = "/delete")
-    public String deleteCategory(@RequestParam Long id, RedirectAttributes redirectAttributes){
+    public String deleteCategory(@RequestParam Long id, RedirectAttributes redirectAttributes) {
         this.categoryService.remove(id);
-        redirectAttributes.addFlashAttribute("msg","Delete Success");
+        redirectAttributes.addFlashAttribute("msg", "Delete Success");
         return "redirect:/category";
     }
 
     @GetMapping(value = "/show")
-    public String goHome(@RequestParam Long id,Model model, @PageableDefault(size = 2) Pageable pageable){
-        model.addAttribute("blog",blogService.findAllByCategory_Id(id,pageable));
+    public String goHome(@RequestParam Long id, Model model, @PageableDefault(size = 2) Pageable pageable) {
+        model.addAttribute("blog", blogService.findAllByCategory_Id(id, pageable));
         return "blog/list";
     }
 }

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>List Book</h2>
+<p th:text="${msg}"></p>
+<form action="/books/pay" method="get">
+    <input type="number" name="code">
+    <input type="submit" value="Pay">
+</form>
+<table border="1">
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Show</th>
+    </tr>
+    <tr th:each="b,loop : ${books}">
+        <td th:text="${loop.count}"></td>
+        <td th:text="${b.name}"></td>
+        <td><a th:href="@{/books/show(id=${b.id})}">Show</a></td>
+    </tr>
+</table>
+</body>
+</html>

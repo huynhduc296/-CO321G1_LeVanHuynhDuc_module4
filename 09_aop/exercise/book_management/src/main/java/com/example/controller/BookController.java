@@ -69,7 +69,7 @@ public class BookController {
 
     @ExceptionHandler(BookException.class)
     public String bookException() {
-        return "book_error";
+        return "error";
     }
 
 }

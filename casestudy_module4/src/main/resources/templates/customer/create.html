@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="layout :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+    small{
+        color: red;
+    }
+</style>
+<div th:insert="layout :: header" ></div>
+<div class="container-fluid d-flex justify-content-center">
+    <h1>Create New Customer</h1>
+</div>
+<div class="container d-flex ">
+    <form action="/customers/create" style="width: 70%;margin-left: 155px" method="post" th:object="${customerDto}">
+        <div class="form-group row">
+            <label for="inputCode" class="col-sm-3 col-form-label">Customer Code</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="inputCode" th:field="*{customerCode}">
+                <small th:errors="*{customerCode}"></small>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputName" class="col-sm-3 col-form-label">Customer Name</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="inputName" th:field="*{customerName}">
+                <small th:errors="*{customerName}"></small>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputType" class="col-sm-3 col-form-label">Type of customer</label>
+            <div class="col-sm-6">
+                <select  id="inputType" th:field="*{customerType}">
+                    <option th:each="customerType : ${customerTypes}" th:value="${customerType.customerTypeId}"
+                            th:text="${customerType.customerTypeName}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputDate" class="col-sm-3 col-form-label">Date</label>
+            <div class="col-sm-6">
+                <input type="date" class="form-control" id="inputDate" name="date" th:field="*{customerBirthday}">
+                <small th:errors="*{customerBirthday}"></small>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputGender" class="col-sm-3 col-form-label">Gender</label>
+            <div class="col-sm-6">
+                <select  id="inputGender" th:field="*{customerGender}">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputEmail" class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-6">
+                <input type="email" class="form-control" id="inputEmail"  th:field="*{customerEmail}">
+                <small th:errors="*{customerEmail}"></small>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputIdCard" class="col-sm-3 col-form-label">Id card</label>
+            <div class="col-sm-6">
+                <input type="number" class="form-control" id="inputIdCard"  th:field="*{customerIdCard}">
+                <small th:errors="*{customerIdCard}"></small>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPhone" class="col-sm-3 col-form-label">Phone</label>
+            <div class="col-sm-6">
+                <input type="number" class="form-control" id="inputPhone"  th:field="*{customerPhone}">
+                <small th:errors="*{customerPhone}"></small>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inpurAddress" class="col-sm-3 col-form-label">Address</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="inpurAddress"  th:field="*{customerAddress}">
+                <small th:errors="*{customerAddress}"></small>
+            </div>
+        </div>
+        <div class="d-flex ">
+            <a href="/customers" class="btn btn-secondary" style="margin-left: 200px">Back to list</a>
+            <input type="submit" class="btn btn-success" style="margin-left: 174px;width: 100px" value="Create">
+        </div>
+
+    </form>
+</div>
+</body>
+</html>

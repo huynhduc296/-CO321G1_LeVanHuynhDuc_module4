@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ICustomerService{
-    Page<Customer> findAll(String keyWord, Pageable pageable);
-
+    Iterable<Customer> findAll();
     Optional<Customer> findById(Long id);
 
-    void save(Customer book);
+    void save(Customer customer);
 
     void remove(Long id);
-
     List<CustomerType> listCustomerType();
+    Page<Customer> findAllByNameContaining(String name, Pageable pageable);
+    Page<Customer> findAll(Pageable pageable);
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -103,32 +103,61 @@
 </head>
 <body>
 <div class="signup-form">
-    <form action="/examples/actions/confirmation.php" method="post">
+    <form th:action="@{/customers/create}" th:object="${customerDto}" method="post">
         <h2>Register</h2>
         <p class="hint-text">Create Customer</p>
         <div class="form-group">
-            <input type="name" class="form-control" name="name" placeholder="name" required="required">
+            <input type="text" class="form-control" name="code" placeholder="code" required="required" th:field="*{customerCode}">
+            <small th:errors="*{customerCode}"></small>
         </div>
         <div class="form-group">
-            <input type="email" class="form-control" name="email" placeholder="Email" required="required">
+            <input type="text" class="form-control" name="name" placeholder="name" required="required" th:field="*{customerName}">
+            <small th:errors="*{customerName}"></small>
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+            <input type="date" class="form-control" name="Birthday" placeholder="Birthday" required="required"th:field="*{customerBirthday}">
+            <small th:errors="*{customerBirthday}"></small>
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">
+            <label for="inputGender">Gender</label>
+            <div>
+                <select class="custom-select custom-select-sm"  id="inputGender" th:field="*{customerGender}">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">
+            <input type="text" class="form-control" name="customerIdCard" placeholder="customerIdCard" required="required"th:field="*{customerIdCard}">
+            <small th:errors="*{customerIdCard}"></small>
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">
+            <input type="text" class="form-control" name="customerPhone" placeholder="customerPhone" required="required"th:field="*{customerPhone}">
+            <small th:errors="*{customerPhone}"></small>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
+            <input type="email" class="form-control" name="email" placeholder="email" required="required"th:field="*{customerEmail}">
+            <small th:errors="*{customerEmail}"></small>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="customerAddress" placeholder="customerAddress" required="required"th:field="*{customerAddress}">
+            <small th:errors="*{customerAddress}"></small>
+
+        </div>
+        <div class="form-group">
+            <label for="inputType">Type customer</label>
+            <div>
+                <select class="custom-select custom-select-sm"  id="inputType" th:field="*{customerType}">
+                    <option th:each="customerType : ${customerTypes}" th:value="${customerType.customerTypeId}"
+                            th:text="${customerType.customerTypeName}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="create" class="btn btn-success btn-lg btn-block">Create Customer</input>
         </div>
     </form>
-    <div class="text-center">Already have an account? <a href="#">Sign in</a></div>
 </div>
 </body>
 </html>

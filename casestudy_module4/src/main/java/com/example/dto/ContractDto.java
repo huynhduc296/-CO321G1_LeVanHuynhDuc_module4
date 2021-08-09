@@ -1,47 +1,36 @@
-package com.example.model.entity.contract;
+package com.example.dto;
 
 import com.example.model.entity.customer.Customer;
 import com.example.model.entity.employee.Employee;
 import com.example.model.entity.service.Service;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-import javax.persistence.*;
-import java.util.Set;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-@Entity
-public class Contract {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long contractId;
-    private String contractStartDate;
-    private String contractEndDate;
+public class ContractDto implements Validator {
+
+    private Long id;
+    private String contractStartDate ;
+    private String contractEndDate ;
     private String contractDeposit;
     private String contractTotalMoney;
-    private boolean flag;
-
-    @OneToMany(mappedBy = "contract")
-    private Set<ContractDetail> contractDetailSet;
-
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
     private Employee employee;
-
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
     private Customer customer;
-
-    @ManyToOne
-    @JoinColumn(name = "service_id")
     private Service service;
+    private boolean flag=true;
 
-    public Contract() {
+    public ContractDto() {
     }
 
-    public Long getContractId() {
-        return contractId;
+    public Long getId() {
+        return id;
     }
 
-    public void setContractId(Long contractId) {
-        this.contractId = contractId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getContractStartDate() {
@@ -76,22 +65,6 @@ public class Contract {
         this.contractTotalMoney = contractTotalMoney;
     }
 
-    public boolean isFlag() {
-        return flag;
-    }
-
-    public void setFlag(boolean flag) {
-        this.flag = flag;
-    }
-
-    public Set<ContractDetail> getContractDetailSet() {
-        return contractDetailSet;
-    }
-
-    public void setContractDetailSet(Set<ContractDetail> contractDetailSet) {
-        this.contractDetailSet = contractDetailSet;
-    }
-
     public Employee getEmployee() {
         return employee;
     }
@@ -114,5 +87,35 @@ public class Contract {
 
     public void setService(Service service) {
         this.service = service;
+    }
+
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        ContractDto contractDto = (ContractDto) target;
+        Date sDate= null;
+        try {
+            sDate = new SimpleDateFormat("yyyy-MM-dd").parse(contractDto.contractStartDate);
+            Date eDate= new SimpleDateFormat("yyyy-MM-dd").parse(contractDto.contractEndDate);
+            if (eDate.getTime()<sDate.getTime()){
+                errors.rejectValue("contractEndDate", "endDate.valid", "End date must be more start date");
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

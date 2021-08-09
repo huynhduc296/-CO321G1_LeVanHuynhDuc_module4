@@ -11,15 +11,9 @@ public class CustomerType {
     private String customerTypeName;
 
     @OneToMany(mappedBy = "customerType")
-    private List<Customer>customerList;
+    private List<Customer> customerList;
 
     public CustomerType() {
-    }
-
-    public CustomerType(Long customerTypeId, String customerTypeName, List<Customer> customerList) {
-        this.customerTypeId = customerTypeId;
-        this.customerTypeName = customerTypeName;
-        this.customerList = customerList;
     }
 
     public Long getCustomerTypeId() {

@@ -8,8 +8,11 @@ public class AttachService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long attachServiceId;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private Double cost;
+    @Column(nullable = false)
     private Integer unit;
     private String status;
 
@@ -18,6 +21,7 @@ public class AttachService {
 
     public AttachService() {
     }
+
     public Long getAttachServiceId() {
         return attachServiceId;
     }

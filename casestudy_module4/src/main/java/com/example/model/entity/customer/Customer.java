@@ -4,41 +4,44 @@ import com.example.model.entity.contract.Contract;
 
 import javax.persistence.*;
 import java.util.List;
-
 @Entity
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long customerId;
+    @Column(nullable = false)
     private String customerCode;
+    @Column(nullable = false)
     private String customerName;
+    @Column(nullable = false)
     private String customerBirthday;
+    @Column(nullable = false)
     private String customerGender;
+    @Column(nullable = false)
     private String customerIdCard;
+    @Column(nullable = false)
     private String customerPhone;
     private String customerEmail;
     private String customerAddress;
+    private boolean flag;
 
     @ManyToOne
-    @JoinColumn(referencedColumnName = "customerTypeId",name = "customer_type_id")
+    @JoinColumn(referencedColumnName = "customerTypeId", nullable = false, name = "customer_type_id")
     private CustomerType customerType;
 
-    @OneToMany(mappedBy = "contract")
+    @OneToMany(mappedBy = "customer")
     private List<Contract> contractList;
-    public Customer() {
+
+
+    public List<Contract> getContractList() {
+        return contractList;
     }
 
-    public Customer(Long customerId, String customerCode, String customerName, String customerBirthday, String customerGender, String customerIdCard, String customerPhone, String customerEmail, String customerAddress, CustomerType customerType) {
-        this.customerId = customerId;
-        this.customerCode = customerCode;
-        this.customerName = customerName;
-        this.customerBirthday = customerBirthday;
-        this.customerGender = customerGender;
-        this.customerIdCard = customerIdCard;
-        this.customerPhone = customerPhone;
-        this.customerEmail = customerEmail;
-        this.customerAddress = customerAddress;
-        this.customerType = customerType;
+    public void setContractList(List<Contract> contractList) {
+        this.contractList = contractList;
+    }
+
+    public Customer() {
     }
 
     public Long getCustomerId() {
@@ -111,6 +114,14 @@ public class Customer {
 
     public void setCustomerAddress(String customerAddress) {
         this.customerAddress = customerAddress;
+    }
+
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
     }
 
     public CustomerType getCustomerType() {

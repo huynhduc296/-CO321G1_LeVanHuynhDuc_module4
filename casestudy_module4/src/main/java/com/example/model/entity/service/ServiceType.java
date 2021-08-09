@@ -9,16 +9,11 @@ public class ServiceType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long serviceTypeId;
     private String serviceTypeName;
+
     @OneToMany(mappedBy = "serviceType")
-    private List<Service>ServiceList;
+    private List<Service> serviceList;
 
     public ServiceType() {
-    }
-
-    public ServiceType(Long serviceTypeId, String serviceTypeName, List<Service> serviceList) {
-        this.serviceTypeId = serviceTypeId;
-        this.serviceTypeName = serviceTypeName;
-        ServiceList = serviceList;
     }
 
     public Long getServiceTypeId() {
@@ -38,10 +33,10 @@ public class ServiceType {
     }
 
     public List<Service> getServiceList() {
-        return ServiceList;
+        return serviceList;
     }
 
     public void setServiceList(List<Service> serviceList) {
-        ServiceList = serviceList;
+        this.serviceList = serviceList;
     }
 }

@@ -103,52 +103,54 @@
 </head>
 <body>
 <div class="signup-form">
-    <form th:action="@{/customers/edit}" th:object="${customerDto}" method="post">
+    <form th:action="@{/Services/create}" th:object="${serviceDto}" method="post">
         <h2>Register</h2>
         <p class="hint-text">Create Customer</p>
         <div class="form-group">
-            <input type="text" class="form-control" name="code" placeholder="code" required="required" th:field="*{customerCode}">
+            <input type="text" class="form-control" name="name" placeholder="name" required="required"  th:field="*{serviceName}">
+            <small th:errors="*{serviceName}"></small>
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" name="name" placeholder="name" required="required" th:field="*{customerName}">
+            <input type="text" class="form-control" name="area" placeholder="area" required="required"  th:field="*{area}">
+            <small th:errors="*{area}"></small>
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" name="Birthday" placeholder="Birthday" required="required"th:field="*{customerBirthday}">
+            <input type="text" class="form-control" name="poolArea" placeholder="poolArea" required="required"th:field="*{poolArea}">
+            <small th:errors="*{poolArea}"></small>
         </div>
         <div class="form-group">
-            <label for="inputGender">Gender</label>
+            <input type="text" class="form-control" name="Cost" placeholder="Cost" required="required"th:field="*{cost}">
+            <small th:errors="*{cost}"></small>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="people" placeholder="people" required="required"th:field="*{maxPeople}">
+            <small th:errors="*{maxPeople}"></small>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="Standard room" placeholder="Standard room" required="required"th:field="*{standardRoom}">
+            <small th:errors="*{standardRoom}"></small>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="description" placeholder="description" required="required"th:field="*{description}">
+            <small th:errors="*{description}"></small>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="numberFloor" placeholder="numberFloor" required="required"th:field="*{numberFloor}">
+            <small th:errors="*{numberFloor}"></small>
+        </div>
+        <div class="form-group">
+            <label for="inputType">Type Service</label>
             <div>
-                <select class="custom-select custom-select-sm"  id="inputGender" th:field="*{customerGender}">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
+                <select class="custom-select custom-select-sm"  id="inputType" th:field="*{serviceType}">
+                    <option th:each="s : ${serviceTypes}"th:value="${s.serviceTypeId}"
+                            th:text="${s.serviceTypeName}"></option>
                 </select>
             </div>
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" name="customerIdCard" placeholder="customerIdCard" required="required"th:field="*{customerIdCard}">
+            <input type="submit" value="create" class="btn btn-success btn-lg btn-block">Create service</input>
         </div>
-        <div class="form-group">
-            <input type="text" class="form-control" name="customerPhone" placeholder="customerPhone" required="required"th:field="*{customerPhone}">
-        </div>
-        <div class="form-group">
-            <input type="email" class="form-control" name="email" placeholder="email" required="required"th:field="*{customerEmail}">
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" name="customerAddress" placeholder="customerAddress" required="required"th:field="*{customerAddress}">
-        </div>
-        <div class="form-group">
-            <label for="inputType">Type customer</label>
-            <div>
-                <select class="custom-select custom-select-sm"  id="inputType" th:field="*{customerType}">
-                    <option th:each="customerType : ${customerTypes}" th:value="${customerType.customerTypeId}"
-                            th:text="${customerType.customerTypeName}"></option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-success" style="margin-left: 174px;width: 100px" value="Edit">
-        </div>
+
     </form>
 </div>
 </body>

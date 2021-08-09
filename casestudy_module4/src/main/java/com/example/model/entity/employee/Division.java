@@ -9,6 +9,7 @@ public class Division {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long divisionId;
     private String divisionName;
+
     @OneToMany(mappedBy = "division")
     private List<Employee> employeeList;
 

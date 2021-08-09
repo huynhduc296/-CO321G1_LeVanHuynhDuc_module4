@@ -172,12 +172,12 @@
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-8"><h2><b>Customer</b></h2></div>
+                    <div class="col-sm-8"><h2>services <b>Details</b></h2></div>
                     <div class="col-sm-4">
                         <div class="search-box">
                             <form class="form-inline my-2 my-lg-0 d-flex" >
                                 <i class="material-icons">&#xE8B6;</i>
-                                <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Search" name="keyWord">
                                 <button class="btn btn-info my-2 my-sm-0" type="submit">Search</button>
                             </form>
                         </div>
@@ -191,40 +191,38 @@
             <table class="table table-striped table-hover table-bordered">
                 <thead>
                 <tr>
-                    <th scope="col">STT</th>
-                    <th scope="col">Customer Code</th>
+                    <th scope="col">ID</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Type Customer</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Gender</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">View</th>
+                    <th scope="col">Area</th>
+                    <th scope="col">Cost</th>
+                    <th scope="col">Max People</th>
+                    <th scope="col">Rent type</th>
+                    <th scope="col">Service type</th>
+                    <th scope="col">Show</th>
                     <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="customer,status : ${customers}">
-                    <th scope="row" th:text="${status.count}"></th>
-                    <th th:text="${customer.customerCode}"></th>
-                    <td th:text="${customer.customerName}"></td>
-                    <td th:text="${customer.customerType.customerTypeName}"></td>
-                    <td th:text="${customer.customerBirthday}"></td>
-                    <td th:text="${customer.customerGender}"></td>
-                    <td th:text="${customer.customerPhone}"></td>
-                    <td th:text="${customer.customerEmail}"></td>
-                    <td th:text="${customer.customerAddress}"></td>
+                <tr th:each="service,s : ${services}">
+                    <th scope="row" th:text="${service.serviceId}">${service.id}</th>
+                    <td th:text="${service.serviceName}"></td>
+                    <td th:text="${service.area}"></td>
+                    <td th:text="${service.cost}"></td>
+                    <td th:text="${service.maxPeople}"></td>
+                    <td th:text="${service.rentType.rentTypeName}"></td>
+                    <td th:text="${service.serviceType.serviceTypeName}"></td>
+                    <td><a class="btn btn-info" href="/services?action=show&id=${service.id}">Show</a></td>
+                    <td><a class="btn btn-warning"  href="/services?action=edit&id=${service.id}">Edit</a></td>
                     <td><a href="#" class="view" title="View" data-toggle="tooltip"><i
                             class="material-icons">&#xE417;</i></a></td>
                     <td><a href="#" class="edit" title="Edit" data-toggle="tooltip"
-                           th:href="@{/customers/edit(id=${customer.customerId})}"><i
+                           th:href="@{/customers/edit(id=${service.serviceId})}"><i
                             class="material-icons">&#xE254;</i></a></td>
                     <td>
                         <button type="button" class="btn btn-danger buttonDelete" data-toggle="modal"
                                 data-target="#exampleModal"
-                                th:data1="${customer.customerId}" th:data2="${customer.customerName}"
+                                th:data1="${service.serviceId}" th:data2="${service.serviceName}"
                                 onclick="sendData(this.getAttribute('data1'),this.getAttribute('data2'))">
                             Delete
                         </button>
@@ -238,7 +236,7 @@
                     <div class="modal-content">
                         <form action="/customers/delete" method="post">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Delete customer</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Delete service</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -256,20 +254,18 @@
                 </div>
             </div>
             <div>
-                <a class="btn btn-info" th:href="@{/customers(page=${customers.number - 1},keyWord=${search})}"
-                   th:if="${customers.hasPrevious()}">Previous</a>
-                <span th:text="${customers.number+1}"></span>/<span th:text="${customers.totalPages}"></span>
-                <a class="btn btn-info" th:href="@{/customers(page=${customers.number + 1},keyWord=${search})}"
-                   th:if="${customers.hasNext()}">Next</a>
+                <a th:href="@{/services(page=${services.number - 1},keyWord=${search})}" th:if="${services.hasPrevious()}">Previous</a>
+                <span th:text="${services.number+1}"></span>/<span th:text="${services.totalPages}"></span>
+                <a th:href="@{/services(page=${services.number + 1},keyWord=${search})}" th:if="${services.hasNext()}">Next</a>
             </div>
         </div>
     </div>
 </div>
-    <script type="text/javascript">
-        function sendData(id, name) {
-            document.getElementById("customerName").innerText = name;
-            document.getElementById("customerId").value = id;
-        }
-    </script>
+<script type="text/javascript">
+    function sendData(id, name) {
+        document.getElementById("customerName").innerText = name;
+        document.getElementById("customerId").value = id;
+    }
+</script>
 </body>
 </html>

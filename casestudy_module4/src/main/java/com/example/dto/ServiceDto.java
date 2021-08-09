@@ -1,56 +1,32 @@
-package com.example.model.entity.service;
+package com.example.dto;
 
-import com.example.model.entity.contract.Contract;
+import com.example.model.entity.service.RentType;
+import com.example.model.entity.service.ServiceType;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-@Entity
-public class Service {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class ServiceDto implements Validator {
     private Long serviceId;
-    @Column(nullable = false)
+    @NotBlank
     private String serviceName;
+    @NotBlank
     private String area;
-    @Column(nullable = false)
+    @NotNull
     private Double cost;
+    @NotBlank
     private String maxPeople;
     private String standardRoom;
     private String description;
     private Double poolArea;
     private String numberFloor;
-    private boolean flag;
-
-    @ManyToOne
-    @JoinColumn(referencedColumnName = "rentTypeId",nullable = false)
     private RentType rentType;
-
-    public List<Contract> getContractList() {
-        return contractList;
-    }
-
-    public void setContractList(List<Contract> contractList) {
-        this.contractList = contractList;
-    }
-
-    @ManyToOne
-    @JoinColumn(referencedColumnName = "serviceTypeId",nullable = false)
     private ServiceType serviceType;
+    private boolean flag = true;
 
-    @OneToMany(mappedBy = "service")
-    private List<Contract> contractList;
-
-
-    public Service() {
-    }
-
-    public boolean isFlag() {
-        return flag;
-    }
-
-    public void setFlag(boolean flag) {
-        this.flag = flag;
+    public ServiceDto() {
     }
 
     public Long getServiceId() {
@@ -85,6 +61,14 @@ public class Service {
         this.cost = cost;
     }
 
+    public Double getPoolArea() {
+        return poolArea;
+    }
+
+    public void setPoolArea(Double poolArea) {
+        this.poolArea = poolArea;
+    }
+
     public String getMaxPeople() {
         return maxPeople;
     }
@@ -109,13 +93,6 @@ public class Service {
         this.description = description;
     }
 
-    public Double getPoolArea() {
-        return poolArea;
-    }
-
-    public void setPoolArea(Double poolArea) {
-        this.poolArea = poolArea;
-    }
 
     public String getNumberFloor() {
         return numberFloor;
@@ -139,5 +116,35 @@ public class Service {
 
     public void setServiceType(ServiceType serviceType) {
         this.serviceType = serviceType;
+    }
+
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        ServiceDto serviceDto = (ServiceDto) target;
+//        if (!serviceDto.cost.matches("^[0-9]+$")) {
+//            errors.rejectValue("cost", "service.validCost", "Service cost format number");
+//        } else if (Integer.parseInt(serviceDto.cost) < 0) {
+//            errors.rejectValue("cost", "service.validCost", "Service cost great 0");
+//        }
+        if (!serviceDto.numberFloor.equals("")) {
+            if (!serviceDto.numberFloor.matches("^[0-9]+$")) {
+                errors.rejectValue("numberFloor", "service.validFloor", "Service number of floors format number");
+            } else if (Integer.parseInt(serviceDto.numberFloor) <= 0) {
+                errors.rejectValue("numberFloor", "service.validFloor", "Number of floors great 0");
+            }
+        }
     }
 }

@@ -1,12 +1,16 @@
 package com.example.model.entity.contract;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class ContractDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long contractDetailId;
+    @Column(nullable = false)
     private Integer quantity;
+
     @ManyToOne
     @JoinColumn(name = "attach_service_id",nullable = false)
     private AttachService attachService;
@@ -18,10 +22,12 @@ public class ContractDetail {
     public ContractDetail() {
     }
 
-    public ContractDetail(Integer quantity, AttachService attachService, Contract contract) {
-        this.quantity = quantity;
-        this.attachService = attachService;
-        this.contract = contract;
+    public Long getContractDetailId() {
+        return contractDetailId;
+    }
+
+    public void setContractDetailId(Long contractDetailId) {
+        this.contractDetailId = contractDetailId;
     }
 
     public Integer getQuantity() {

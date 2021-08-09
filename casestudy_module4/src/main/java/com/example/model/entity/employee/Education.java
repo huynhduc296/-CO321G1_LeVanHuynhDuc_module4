@@ -6,32 +6,32 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Position {
+public class Education {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long positionId;
-    private String positionName;
+    private Long educationId;
+    private String educationName;
 
-    @OneToMany(mappedBy = "position")
+    @OneToMany(mappedBy = "education")
     private List<Employee> employeeList;
 
-    public Position() {
+    public Education() {
     }
 
-    public Long getPositionId() {
-        return positionId;
+    public Long getEducationId() {
+        return educationId;
     }
 
-    public void setPositionId(Long positionId) {
-        this.positionId = positionId;
+    public void setEducationId(Long educationId) {
+        this.educationId = educationId;
     }
 
-    public String getPositionName() {
-        return positionName;
+    public String getEducationName() {
+        return educationName;
     }
 
-    public void setPositionName(String positionName) {
-        this.positionName = positionName;
+    public void setEducationName(String educationName) {
+        this.educationName = educationName;
     }
 
     public List<Employee> getEmployeeList() {

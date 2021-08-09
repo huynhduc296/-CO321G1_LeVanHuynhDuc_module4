@@ -10,8 +10,10 @@ public class RentType {
     private Long rentTypeId;
     private String rentTypeName;
     private Double rentTypeCost;
+
     @OneToMany(mappedBy = "rentType")
-    private List<Service>serviceList;
+    private List<Service> serviceList;
+
     public RentType() {
     }
 

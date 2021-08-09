@@ -1,18 +1,34 @@
 package com.example.dto;
 
+import com.example.model.entity.customer.CustomerType;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 public class CustomerDto implements Validator {
+
+
     private Long customerId;
+    @NotBlank(message = "please input code")
     private String customerCode;
+    @NotBlank
     private String customerName;
+    @NotBlank
     private String customerBirthday;
+    @NotBlank
     private String customerGender;
+    @NotBlank
     private String customerIdCard;
+    @NotBlank
     private String customerPhone;
+    @Email
     private String customerEmail;
+
     private String customerAddress;
+    private CustomerType customerType;
+    private boolean flag = true;
 
     public CustomerDto() {
     }
@@ -89,6 +105,22 @@ public class CustomerDto implements Validator {
         this.customerAddress = customerAddress;
     }
 
+    public CustomerType getCustomerType() {
+        return customerType;
+    }
+
+    public void setCustomerType(CustomerType customerType) {
+        this.customerType = customerType;
+    }
+
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
+
     @Override
     public boolean supports(Class<?> clazz) {
         return false;
@@ -96,6 +128,15 @@ public class CustomerDto implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-
+        CustomerDto customerDto = (CustomerDto) target;
+        if (!customerDto.customerCode.matches("^KH-[0-9]{4}$")) {
+            errors.rejectValue("customerCode", "customer.validCode", "Customer code format KH-XXXX");
+        }
+        if (!customerDto.customerPhone.matches("^(090|091)[0-9]{7}$")) {
+            errors.rejectValue("customerPhone", "customer.validPhone", "Customer phone format 091xxxxxxx or 090xxxxxxx");
+        }
+        if (!customerDto.customerIdCard.matches("^[0-9]{9,10}$")) {
+            errors.rejectValue("customerIdCard", "customer.validIdcard", "Customer id card format XXXXXXXXX or XXXXXXXXXXXX ");
+        }
     }
 }

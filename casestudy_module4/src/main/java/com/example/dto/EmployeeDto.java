@@ -1,66 +1,36 @@
-package com.example.model.entity.employee;
-import com.example.model.entity.contract.Contract;
+package com.example.dto;
 
-import javax.persistence.*;
-import java.util.List;
-import java.util.Set;
+import com.example.model.entity.employee.Division;
+import com.example.model.entity.employee.Education;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-@Entity
-public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+import javax.swing.text.Position;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
+public class EmployeeDto implements Validator {
     private Long employeeId;
-    @Column(nullable = false)
+    @NotBlank
     private String name;
-    @Column(nullable = false)
+    @NotBlank
     private String birthday;
-    @Column(nullable = false)
+    @NotBlank
     private String idCard;
-    @Column(nullable = false)
+    @NotBlank
     private String salary;
-    @Column(nullable = false)
+    @NotBlank
     private String phone;
+    @Email
     private String email;
     private String address;
-    private boolean flag;
 
-    public List<Contract> getContractList() {
-        return contractList;
-    }
-
-    public void setContractList(List<Contract> contractList) {
-        this.contractList = contractList;
-    }
-
-    @ManyToOne
-    @JoinColumn(referencedColumnName = "divisionId",nullable = false,name = "division_id")
-    private Division division;
-
-    @ManyToOne
-    @JoinColumn(referencedColumnName = "educationId",nullable = false,name = "education_id")
-    private Education education;
-
-    @ManyToOne
-    @JoinColumn(referencedColumnName = "positionId",nullable = false,name = "position_id")
     private Position position;
+    private Division division;
+    private Education education;
+    private boolean flag = true;
 
-    @ManyToOne
-    @JoinColumn(name = "username")
-    private User user;
-
-    @OneToMany(mappedBy = "employee")
-    private List<Contract> contractList;
-
-
-    public Employee() {
-    }
-
-    public boolean isFlag() {
-        return flag;
-    }
-
-    public void setFlag(boolean flag) {
-        this.flag = flag;
+    public EmployeeDto() {
     }
 
     public Long getEmployeeId() {
@@ -127,6 +97,14 @@ public class Employee {
         this.address = address;
     }
 
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
     public Division getDivision() {
         return division;
     }
@@ -143,11 +121,33 @@ public class Employee {
         this.education = education;
     }
 
-    public Position getPosition() {
-        return position;
+    public boolean isFlag() {
+        return flag;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        EmployeeDto employeeDto = (EmployeeDto) target;
+
+        if (!employeeDto.phone.matches("^(090|091)[0-9]{7}$")) {
+            errors.rejectValue("phone", "employee.validPhone", "Employee phone format 091xxxxxxx or 090xxxxxxx");
+        }
+        if (!employeeDto.idCard.matches("^[0-9]{9,10}$")) {
+            errors.rejectValue("idCard", "employee.validIdCard", "Employee id card format XXXXXXXXX or XXXXXXXXXXXX ");
+        }
+        if (!employeeDto.salary.matches("^[0-9]+$")) {
+            errors.rejectValue("salary", "employee.validSalary", "Employee salary format number");
+        } else if (Integer.parseInt(employeeDto.salary) < 0) {
+            errors.rejectValue("salary", "employee.validSalary", "Employee salary great 0");
+        }
     }
 }

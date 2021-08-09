@@ -31,15 +31,24 @@ public class CustomerController {
         return customerService.listCustomerType();
     }
 
+
     @GetMapping(value = {""})
-    public ModelAndView goList(@RequestParam("keyWord") Optional<String> keyWord,
-                               @RequestParam("page") Optional<Integer> page) {
-        Pageable pageable= PageRequest.of(page.orElse(0),5);
-        Page<Customer> customers = customerService.findAll(keyWord.orElse(""),pageable);
-        ModelAndView modelAndView = new ModelAndView("customer/list","customers",customers);
-        modelAndView.addObject("keyWord", keyWord.orElse(""));
+    public ModelAndView goList(@RequestParam("search") Optional<String> search,
+                                 @RequestParam("page") Optional<Integer> page) {
+                  Pageable pageable= PageRequest.of(page.orElse(0),3);
+        Page<Customer> customers;
+        ModelAndView modelAndView = new ModelAndView("/customer/list");
+        if (search.isPresent()) {
+            customers = customerService.findAllByNameContaining(search.get(), pageable);
+            modelAndView.addObject("search", search.get());
+        } else {
+            customers = customerService.findAll(pageable);
+        }
+        modelAndView.addObject("customers", customers);
         return modelAndView;
     }
+
+
 
     @GetMapping(value = "create")
     public String showFormCreate(Model model){

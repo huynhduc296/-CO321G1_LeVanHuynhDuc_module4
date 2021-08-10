@@ -95,6 +95,7 @@ public class CustomerController {
         return "redirect:/customers";
     }
 
+
     @PostMapping(value = "delete")
     public String deleteCustomer(@RequestParam Long id,RedirectAttributes redirectAttributes){
         this.customerService.remove(id);

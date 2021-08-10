@@ -1,14 +1,8 @@
 package com.example.model.service.impl;
 
 
-import com.example.model.entity.employee.Division;
-import com.example.model.entity.employee.Education;
-import com.example.model.entity.employee.Employee;
-import com.example.model.entity.employee.Position;
-import com.example.model.repository.employee.DivisionRepository;
-import com.example.model.repository.employee.EducationRepository;
-import com.example.model.repository.employee.EmployeeRepository;
-import com.example.model.repository.employee.PositionRepository;
+import com.example.model.entity.employee.*;
+import com.example.model.repository.employee.*;
 import com.example.model.service.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,6 +22,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
     private PositionRepository positionRepository;
     @Autowired
     private EmployeeRepository employeeRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public Iterable<Employee> findAll() {
@@ -52,6 +48,11 @@ public class EmployeeServiceImpl implements IEmployeeService {
     @Override
     public List<Division> listDivision() {
         return divisionRepository.findAll();
+    }
+
+    @Override
+    public List<User> listUser() {
+        return userRepository.findAll();
     }
 
     @Override

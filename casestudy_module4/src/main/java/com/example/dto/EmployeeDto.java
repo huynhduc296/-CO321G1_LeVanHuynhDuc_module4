@@ -2,10 +2,11 @@ package com.example.dto;
 
 import com.example.model.entity.employee.Division;
 import com.example.model.entity.employee.Education;
+import com.example.model.entity.employee.Position;
+import com.example.model.entity.employee.User;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import javax.swing.text.Position;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
@@ -24,10 +25,19 @@ public class EmployeeDto implements Validator {
     @Email
     private String email;
     private String address;
-
+    private User user;
     private Position position;
     private Division division;
     private Education education;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     private boolean flag = true;
 
     public EmployeeDto() {

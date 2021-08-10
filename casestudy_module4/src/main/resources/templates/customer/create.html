@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
-    <title>Bootstrap Simple Registration Form</title>
+    <title>Khu Nghỉ Dưỡng Furama</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -146,9 +146,9 @@
 
         </div>
         <div class="form-group">
-            <label for="inputType">Type customer</label>
+            <label>Type customer</label>
             <div>
-                <select class="custom-select custom-select-sm"  id="inputType" th:field="*{customerType}">
+                <select class="custom-select custom-select-sm" th:field="*{customerType}">
                     <option th:each="customerType : ${customerTypes}" th:value="${customerType.customerTypeId}"
                             th:text="${customerType.customerTypeName}"></option>
                 </select>

@@ -1,20 +1,23 @@
 package com.example.controller;
 
+import com.example.dto.CustomerDto;
 import com.example.dto.EmployeeDto;
+import com.example.model.entity.customer.Customer;
 import com.example.model.entity.employee.*;
 import com.example.model.service.IEmployeeService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,12 +32,17 @@ public class EmployeeController {
         return employeeService.listDivision();
     }
 
-    @ModelAttribute("position")
+    @ModelAttribute("users")
+    public List<User> users () {
+        return employeeService.listUser();
+    }
+
+    @ModelAttribute("positions")
     public List<Position> positions () {
         return employeeService.listPosition();
     }
 
-    @ModelAttribute("education")
+    @ModelAttribute("educations")
     public List<Education> educations () {
         return employeeService.listEducation();
     }
@@ -59,5 +67,54 @@ public class EmployeeController {
     public String showFormCreate(Model model){
         model.addAttribute("employeeDto",new EmployeeDto());
         return "employee/create";
+    }
+
+    @PostMapping(value = "create")
+    public String createEmployee(@ModelAttribute @Valid EmployeeDto employeeDto,
+                                 BindingResult bindingResult ,
+                                 RedirectAttributes redirectAttributes){
+        new EmployeeDto().validate(employeeDto,bindingResult);
+        if (bindingResult.hasErrors()){
+            return "employee/create";
+        }
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDto,employee);
+        this.employeeService.save(employee);
+        redirectAttributes.addFlashAttribute("msg","Create new employee successfully!!!");
+        return "redirect:/employees";
+    }
+
+    @GetMapping(value = "edit")
+    public String showFormEdit(@RequestParam Long id,Model model){
+        Employee employee = this.employeeService.findById(id).get();
+        EmployeeDto employeeDto = new EmployeeDto();
+        BeanUtils.copyProperties(employee,employeeDto);
+        model.addAttribute("employeeDto",employeeDto);
+        return "employee/edit";
+    }
+
+    @PostMapping(value = "edit")
+    public String editEmployee(@ModelAttribute @Valid EmployeeDto employeeDto,
+                               BindingResult bindingResult,
+                               RedirectAttributes redirectAttributes){
+        new EmployeeDto().validate(employeeDto,bindingResult);
+        if (bindingResult.hasErrors()){
+            return "employee/edit";
+        }
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDto,employee);
+        this.employeeService.save(employee);
+        redirectAttributes.addFlashAttribute("msg","edit successfully");
+        return "redirect:/employees";
+    }
+
+
+
+    @PostMapping(value = "delete")
+    public String deleteCustomer(@RequestParam Long id,RedirectAttributes redirectAttributes){
+        this.employeeService.remove(id);
+        redirectAttributes.addFlashAttribute("msg","Delete successfully!!!");
+        return "redirect:/employees";
+
     }
 }

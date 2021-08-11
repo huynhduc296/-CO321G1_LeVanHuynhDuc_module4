@@ -103,64 +103,49 @@
 </head>
 <body>
 <div class="signup-form">
-    <form th:action="@{/employees/edit}" th:object="${employeeDto}" method="post">
+    <form th:action="@{/services/edit}" th:object="${ServiceDto}" method="post">
         <h2>Register</h2>
         <p class="hint-text">edit employee</p>
-            <input type="hidden" class="form-control" name="id" placeholder="id" required="required" th:field="*{employeeId}">
+        <input type="hidden" class="form-control" name="serviceId" placeholder="serviceId" required="required" th:field="*{serviceId}">
         <div class="form-group">
-            <input type="text" class="form-control" name="name" placeholder="name" required="required" th:field="*{name}">
+            <input type="text" class="form-control" name="serviceName" placeholder="serviceName" required="required" th:field="*{serviceName}">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" name="birthday" placeholder="birthday" required="required"th:field="*{birthday}">
+            <input type="text" class="form-control" name="area" placeholder="area" required="required"th:field="*{area}">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" name="phone" placeholder="phone" required="required"th:field="*{phone}">
+            <input type="text" class="form-control" name="cost" placeholder="cost" required="required"th:field="*{cost}">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" name="idCard" placeholder="idCard" required="required"th:field="*{idCard}">
+            <input type="text" class="form-control" name="maxPeople" placeholder="maxPeople" required="required"th:field="*{maxPeople}">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" name="salary" placeholder="salary" required="required"th:field="*{salary}">
+            <input type="date" class="form-control" name="standardRoom" placeholder="standardRoom" required="required"th:field="*{standardRoom}">
         </div>
         <div class="form-group">
-            <input type="email" class="form-control" name="email" placeholder="email" required="required"th:field="*{email}">
+            <input type="text" class="form-control" name="description" placeholder="description" required="required"th:field="*{description}">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" name="address" placeholder="address" required="required"th:field="*{address}">
+            <input type="text" class="form-control" name="poolArea" placeholder="poolArea" required="required"th:field="*{poolArea}">
         </div>
         <div class="form-group">
-            <label for="inputType">Type customer</label>
+            <input type="text" class="form-control" name="address" placeholder="address" required="required"th:field="*{numberFloor}">
+        </div>
+        <div class="form-group">
+            <label for="inputType">serviceType</label>
             <div>
-                <select class="custom-select custom-select-sm"  id="inputType" th:field="*{position}">
-                    <option th:each="position : ${positions}" th:value="${position.positionId}"
-                            th:text="${position.positionName}"></option>
+                <select class="custom-select custom-select-sm"  id="inputType" th:field="*{serviceType}">
+                    <option th:each="serviceType : ${serviceTypes}" th:value="${serviceType.serviceTypeId}"
+                            th:text="${serviceType.serviceTypeName}"></option>
                 </select>
             </div>
         </div>
         <div class="form-group">
-            <label for="inputType">educations</label>
+            <label for="inputType">rentType</label>
             <div>
-                <select class="custom-select custom-select-sm"th:field="*{education}">
-                    <option th:each="education : ${educations}" th:value="${education.educationId}"
-                            th:text="${education.educationName}"></option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputType">division</label>
-            <div>
-                <select class="custom-select custom-select-sm" th:field="*{division}">
-                    <option th:each="division : ${divisions}" th:value="${division.divisionId}"
-                            th:text="${division.divisionName}"></option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputType">users</label>
-            <div>
-                <select class="custom-select custom-select-sm" th:field="*{user}">
-                    <option th:each="user : ${users}" th:value="${user.id}"
-                            th:text="${user.username}"></option>
+                <select class="custom-select custom-select-sm"th:field="*{rentType}">
+                    <option th:each="rentType : ${rentTypes}" th:value="${rentType.rentTypeId}"
+                            th:text="${rentType.rentTypeName}"></option>
                 </select>
             </div>
         </div>

@@ -13,9 +13,7 @@ import java.util.Optional;
 public interface IService {
     Iterable<Service> findAll();
     Optional<Service> findById(Long id);
-
     void save(Service service);
-
     void remove(Long id);
     List<RentType> listRentType();
     List<ServiceType> listServiceType();

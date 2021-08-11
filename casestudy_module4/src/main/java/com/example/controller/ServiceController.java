@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.dto.CustomerDto;
 import com.example.dto.ServiceDto;
 import com.example.model.entity.customer.Customer;
 import com.example.model.entity.service.RentType;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -72,5 +74,37 @@ public class ServiceController {
         this.service.save(service);
         redirectAttributes.addFlashAttribute("msg", "create service successfully");
         return "redirect:/services";
+    }
+    @GetMapping(value = "edit")
+    public String showFormEdit(@RequestParam Long id, Model model){
+        Service service = this.service.findById(id).get();
+        ServiceDto serviceDto = new ServiceDto();
+        BeanUtils.copyProperties(service,serviceDto);
+        model.addAttribute("ServiceDto",serviceDto);
+        return "service/edit";
+    }
+
+    @PostMapping(value = "edit")
+    public String editService(@ModelAttribute @Valid ServiceDto serviceDto,
+                               BindingResult bindingResult,
+                               RedirectAttributes redirectAttributes){
+        new ServiceDto().validate(serviceDto,bindingResult);
+        if(bindingResult.hasFieldErrors()){
+            return "service/edit";
+        }
+        Service service = new Service();
+        BeanUtils.copyProperties(serviceDto,service);
+        this.service.save(service);
+        redirectAttributes.addFlashAttribute("msg","Update customer information successfully!!!");
+        return "redirect:/services";
+    }
+
+
+    @PostMapping(value = "delete")
+    public String deleteService(@RequestParam Long id,RedirectAttributes redirectAttributes){
+        this.service.remove(id);
+        redirectAttributes.addFlashAttribute("msg","Delete successfully!!!");
+        return "redirect:/services";
+
     }
 }

@@ -175,15 +175,15 @@
                     <div class="col-sm-8"><h2>services <b>Details</b></h2></div>
                     <div class="col-sm-4">
                         <div class="search-box">
-                            <form class="form-inline my-2 my-lg-0 d-flex" >
+                            <form class="form-inline my-2 my-lg-0 d-flex">
                                 <i class="material-icons">&#xE8B6;</i>
-                                <input class="form-control mr-sm-2" type="text" placeholder="Search" name="keyWord">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search">
                                 <button class="btn btn-info my-2 my-sm-0" type="submit">Search</button>
                             </form>
                         </div>
                         <div class="add-box">
-                            <a href="/customers/create" class="btn btn-success"><i
-                                    class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
+                            <a href="/services/create" class="btn btn-success"><i
+                                    class="material-icons">&#xE147;</i> <span>Add New Service</span></a>
                         </div>
                     </div>
                 </div>
@@ -213,11 +213,11 @@
                     <td th:text="${service.rentType.rentTypeName}"></td>
                     <td th:text="${service.serviceType.serviceTypeName}"></td>
                     <td><a class="btn btn-info" href="/services?action=show&id=${service.id}">Show</a></td>
-                    <td><a class="btn btn-warning"  href="/services?action=edit&id=${service.id}">Edit</a></td>
+                    <td><a class="btn btn-warning" href="/services?action=edit&id=${service.id}">Edit</a></td>
                     <td><a href="#" class="view" title="View" data-toggle="tooltip"><i
                             class="material-icons">&#xE417;</i></a></td>
                     <td><a href="#" class="edit" title="Edit" data-toggle="tooltip"
-                           th:href="@{/customers/edit(id=${service.serviceId})}"><i
+                           th:href="@{/services/edit(id=${service.serviceId})}"><i
                             class="material-icons">&#xE254;</i></a></td>
                     <td>
                         <button type="button" class="btn btn-danger buttonDelete" data-toggle="modal"
@@ -234,7 +234,7 @@
                  aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="/customers/delete" method="post">
+                        <form action="/services/delete" method="post">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Delete service</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -254,9 +254,11 @@
                 </div>
             </div>
             <div>
-                <a th:href="@{/services(page=${services.number - 1},keyWord=${search})}" th:if="${services.hasPrevious()}">Previous</a>
+                <a class="btn btn-info" th:href="@{/services(page=${services.number - 1},keyWord=${search})}"
+                   th:if="${services.hasPrevious()}">Previous</a>
                 <span th:text="${services.number+1}"></span>/<span th:text="${services.totalPages}"></span>
-                <a th:href="@{/services(page=${services.number + 1},keyWord=${search})}" th:if="${services.hasNext()}">Next</a>
+                <a class="btn btn-info" th:href="@{/services(page=${services.number + 1},keyWord=${search})}"
+                   th:if="${services.hasNext()}">Next</a>
             </div>
         </div>
     </div>

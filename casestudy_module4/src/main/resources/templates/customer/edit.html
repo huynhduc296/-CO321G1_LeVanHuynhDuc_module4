@@ -106,6 +106,7 @@
     <form th:action="@{/customers/edit}" th:object="${customerDto}" method="post">
         <h2>Register</h2>
         <p class="hint-text">Edit Customer</p>
+        <input type="hidden" class="form-control" name="customerId" placeholder="customerId" required="required" th:field="*{customerId}">
         <div class="form-group">
             <input type="text" class="form-control" name="code" placeholder="code" required="required" th:field="*{customerCode}">
         </div>

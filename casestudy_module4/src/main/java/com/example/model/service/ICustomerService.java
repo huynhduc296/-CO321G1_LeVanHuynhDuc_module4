@@ -19,4 +19,5 @@ public interface ICustomerService{
     List<CustomerType> listCustomerType();
     Page<Customer> findAllByNameContaining(String name, Pageable pageable);
     Page<Customer> findAll(Pageable pageable);
+
 }

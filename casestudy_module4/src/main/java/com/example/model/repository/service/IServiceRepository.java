@@ -1,6 +1,5 @@
 package com.example.model.repository.service;
 
-import com.example.model.entity.customer.Customer;
 import com.example.model.entity.service.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

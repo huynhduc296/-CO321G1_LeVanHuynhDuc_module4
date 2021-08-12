@@ -16,6 +16,9 @@
             background: #63738a;
             font-family: 'Roboto', sans-serif;
         }
+        small{
+            color: red;
+        }
         .form-control {
             height: 40px;
             box-shadow: none;
@@ -107,14 +110,17 @@
         <h2>Register</h2>
         <p class="hint-text">Create Customer</p>
         <div class="form-group">
+            <label for="inputGender">code</label>
             <input type="text" class="form-control" name="code" placeholder="code" required="required" th:field="*{customerCode}">
             <small th:errors="*{customerCode}"></small>
         </div>
         <div class="form-group">
+            <label for="inputGender">name</label>
             <input type="text" class="form-control" name="name" placeholder="name" required="required" th:field="*{customerName}">
             <small th:errors="*{customerName}"></small>
         </div>
         <div class="form-group">
+            <label for="inputGender">Birthday</label>
             <input type="date" class="form-control" name="Birthday" placeholder="Birthday" required="required"th:field="*{customerBirthday}">
             <small th:errors="*{customerBirthday}"></small>
         </div>
@@ -129,18 +135,22 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="inputGender">customerIdCard</label>
             <input type="text" class="form-control" name="customerIdCard" placeholder="customerIdCard" required="required"th:field="*{customerIdCard}">
             <small th:errors="*{customerIdCard}"></small>
         </div>
         <div class="form-group">
+            <label for="inputGender">customerPhone</label>
             <input type="text" class="form-control" name="customerPhone" placeholder="customerPhone" required="required"th:field="*{customerPhone}">
             <small th:errors="*{customerPhone}"></small>
         </div>
         <div class="form-group">
+            <label for="inputGender">email</label>
             <input type="email" class="form-control" name="email" placeholder="email" required="required"th:field="*{customerEmail}">
             <small th:errors="*{customerEmail}"></small>
         </div>
         <div class="form-group">
+            <label for="inputGender">customerAddress</label>
             <input type="text" class="form-control" name="customerAddress" placeholder="customerAddress" required="required"th:field="*{customerAddress}">
             <small th:errors="*{customerAddress}"></small>
 

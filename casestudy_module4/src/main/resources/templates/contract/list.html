@@ -173,18 +173,18 @@
             <div class="table-title">
                 <p style="color: #005cbf" th:text="${msg}"></p>
                 <div class="row">
-                    <div class="col-sm-8"><h2>Employee <b>Details</b></h2></div>
+                    <div class="col-sm-8"><h2><b>contract</b></h2></div>
                     <div class="col-sm-4">
                         <div class="search-box">
-                            <form class="form-inline my-2 my-lg-0 d-flex" >
+                            <form class="form-inline my-2 my-lg-0 d-flex">
                                 <i class="material-icons">&#xE8B6;</i>
                                 <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search">
                                 <button class="btn btn-info my-2 my-sm-0" type="submit">Search</button>
                             </form>
                         </div>
                         <div class="add-box">
-                            <a href="/employees/create" class="btn btn-success"><i
-                                    class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
+                            <a href="/contracts/create" class="btn btn-success"><i
+                                    class="material-icons">&#xE147;</i> <span>Add New Contract</span></a>
                         </div>
                     </div>
                 </div>
@@ -193,42 +193,36 @@
                 <thead>
                 <tr>
                     <th scope="col">STT</th>
-                    <th scope="col">employee Name</th>
-                    <th scope="col">employee Birthday</th>
-                    <th scope="col">salary</th>
-                    <th scope="col">phone</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">division</th>
-                    <th scope="col">education</th>
-                    <th scope="col">position</th>
-                    <th scope="col">View</th>
+                    <th scope="col">Contract Id</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">ServiceName</th>
+                    <th scope="col">employeeName</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Total money</th>
                     <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="employee,status : ${employees}">
+                <tr th:each="con,status : ${contracts}">
                     <th scope="row" th:text="${status.count}"></th>
-                    <th th:text="${employee.name}"></th>
-                    <td th:text="${employee.birthday}"></td>
-                    <td th:text="${employee.salary}"></td>
-                    <td th:text="${employee.phone}"></td>
-                    <td th:text="${employee.address}"></td>
-                    <td th:text="${employee.division.divisionName}"></td>
-                    <td th:text="${employee.education.educationName}"></td>
-                    <td th:text="${employee.position.positionName}"></td>
-                    <td><a href="#" class="view" title="View" data-toggle="tooltip"><i
-                            class="material-icons">&#xE417;</i></a></td>
-                    <td><a href="#" class="edit" title="Edit" data-toggle="tooltip"
-                           th:href="@{/employees/edit(id=${employee.employeeId})}"><i
-                            class="material-icons">&#xE254;</i></a></td>
+                    <td th:text="${con.contractId}"></td>
+                    <td th:text="${con.customer.customerName}"></td>
+                    <td th:text="${con.service.serviceName}"></td>
+                    <td th:text="${con.employee.name}"></td>
+                    <td th:text="${con.contractStartDate}"></td>
+                    <td th:text="${con.contractEndDate}"></td>
+                    <td th:text="${con.contractTotalMoney}"></td>
+                    <td><a class="btn btn-warning" th:href="@{/contracts/edit(id=${con.contractId})}">Edit</a></td>
                     <td>
                         <button type="button" class="btn btn-danger buttonDelete" data-toggle="modal"
                                 data-target="#exampleModal"
-                                th:data1="${employee.employeeId}" th:data2="${employee.name}"
-                                onclick="sendData(this.getAttribute('data1'),this.getAttribute('data2'))">
+                                th:data1="${con.contractId}"
+                                onclick="sendData(this.getAttribute('data1'))">
                             Delete
                         </button>
+                        <input type="hidden" id="idInput" value="${customer.id}" name="idHiden">
                     </td>
                 </tr>
                 </tbody>
@@ -237,7 +231,7 @@
                  aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="/employees/delete" method="post">
+                        <form action="/customers/delete" method="post">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Delete customer</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -257,11 +251,11 @@
                 </div>
             </div>
             <div>
-                <a class="btn btn-info" th:href="@{/employees(page=${employees.number - 1},keyWord=${search})}"
-                   th:if="${employees.hasPrevious()}">Previous</a>
-                <span th:text="${employees.number+1}"></span>/<span th:text="${employees.totalPages}"></span>
-                <a class="btn btn-info" th:href="@{/employees(page=${employees.number + 1},keyWord=${search})}"
-                   th:if="${employees.hasNext()}">Next</a>
+                <a class="btn btn-info" th:href="@{/customers(page=${customers.number - 1},keyWord=${search})}"
+                   th:if="${customers.hasPrevious()}">Previous</a>
+                <span th:text="${customers.number+1}"></span>/<span th:text="${customers.totalPages}"></span>
+                <a class="btn btn-info" th:href="@{/customers(page=${customers.number + 1},keyWord=${search})}"
+                   th:if="${customers.hasNext()}">Next</a>
             </div>
         </div>
     </div>

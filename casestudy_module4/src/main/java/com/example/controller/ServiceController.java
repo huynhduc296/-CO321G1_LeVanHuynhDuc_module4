@@ -1,8 +1,6 @@
 package com.example.controller;
 
-import com.example.dto.CustomerDto;
 import com.example.dto.ServiceDto;
-import com.example.model.entity.customer.Customer;
 import com.example.model.entity.service.RentType;
 import com.example.model.entity.service.Service;
 import com.example.model.entity.service.ServiceType;

@@ -70,6 +70,9 @@
             top: 8px;
             left: 10px;
         }
+        .search-box button {
+            border-radius: 30px;
+        }
 
         table.table tr th, table.table tr td {
             border-color: #e9e9e9;
@@ -171,19 +174,20 @@
     <div class="table-responsive">
         <div class="table-wrapper">
             <div class="table-title">
+                <p style="color: #005cbf" th:text="${msg}"></p>
                 <div class="row">
                     <div class="col-sm-8"><h2><b>Customer</b></h2></div>
                     <div class="col-sm-4">
                         <div class="search-box">
-                            <form class="form-inline my-2 my-lg-0 d-flex" >
+                            <form  class="form-inline md-form mr-auto mb-4" >
                                 <i class="material-icons">&#xE8B6;</i>
                                 <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search">
-                                <button class="btn btn-info my-2 my-sm-0" type="submit">Search</button>
+                                <button class="form-control " type="submit">Search</button>
                             </form>
                         </div>
                         <div class="add-box">
                             <a href="/customers/create" class="btn btn-success"><i
-                                    class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
+                                    class="material-icons">&#xE147;</i> <span>Add New Customer</span></a>
                         </div>
                     </div>
                 </div>
@@ -195,9 +199,7 @@
                     <th scope="col">Customer Code</th>
                     <th scope="col">Name</th>
                     <th scope="col">Type Customer</th>
-                    <th scope="col">Date</th>
                     <th scope="col">Gender</th>
-                    <th scope="col">Phone</th>
                     <th scope="col">Email</th>
                     <th scope="col">Address</th>
                     <th scope="col">View</th>
@@ -211,9 +213,7 @@
                     <th th:text="${customer.customerCode}"></th>
                     <td th:text="${customer.customerName}"></td>
                     <td th:text="${customer.customerType.customerTypeName}"></td>
-                    <td th:text="${customer.customerBirthday}"></td>
                     <td th:text="${customer.customerGender}"></td>
-                    <td th:text="${customer.customerPhone}"></td>
                     <td th:text="${customer.customerEmail}"></td>
                     <td th:text="${customer.customerAddress}"></td>
                     <td><a href="#" class="view" title="View" data-toggle="tooltip"><i

@@ -134,11 +134,7 @@ public class ServiceDto implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         ServiceDto serviceDto = (ServiceDto) target;
-//        if (!serviceDto.cost.matches("^[0-9]+$")) {
-//            errors.rejectValue("cost", "service.validCost", "Service cost format number");
-//        } else if (Integer.parseInt(serviceDto.cost) < 0) {
-//            errors.rejectValue("cost", "service.validCost", "Service cost great 0");
-//        }
+
         if (!serviceDto.numberFloor.equals("")) {
             if (!serviceDto.numberFloor.matches("^[0-9]+$")) {
                 errors.rejectValue("numberFloor", "service.validFloor", "Service number of floors format number");

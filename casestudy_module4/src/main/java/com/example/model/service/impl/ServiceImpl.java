@@ -1,7 +1,6 @@
 package com.example.model.service.impl;
 
 
-import com.example.model.entity.customer.Customer;
 import com.example.model.entity.service.RentType;
 import com.example.model.entity.service.Service;
 import com.example.model.entity.service.ServiceType;
@@ -54,12 +53,12 @@ public class ServiceImpl implements IService {
     }
 
     @Override
-    public Page<com.example.model.entity.service.Service> findAllByNameContaining(String name, Pageable pageable) {
-        return null;
+    public Page<Service> findAllByNameContaining(String name, Pageable pageable) {
+        return serviceRepository.findByServiceNameContaining(name,pageable);
     }
 
     @Override
-    public Page<com.example.model.entity.service.Service> findAll(Pageable pageable) {
-        return null;
+    public Page<Service> findAll(Pageable pageable) {
+        return serviceRepository.findAll(pageable);
     }
 }
